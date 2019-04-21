@@ -92,6 +92,5 @@ void draw() {
   else{
     laserX = robotX+25;
     laserLength = 0;
-  }
-  
+  }  
 }
