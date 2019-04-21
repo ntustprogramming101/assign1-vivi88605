@@ -6,12 +6,10 @@ float laserX, laserY, laserLength;
 //soldier
 float soldierX;
 float soldierFloor;
-int a ;
 
 //robot
 float robotX;
 float robotFloor;
-int b ;
 
 void setup() {
   
@@ -50,14 +48,12 @@ void setup() {
   //input soldier
   soldier = loadImage("img/soldier.png");
     //decide soldierY
-    a = int(random(0,4));
-    soldierFloor = a*80+160;
+    soldierFloor = int(random(0,4))*80+160;
     
   //input robot
   robot = loadImage("img/robot.png");
     robotX= int(random(25,480));
-    b = int(random(0,4));
-    robotFloor = b*80+160;
+    robotFloor = int(random(0,4))*80+160;
     
   //decide laser movement
   laserX=robotX;
