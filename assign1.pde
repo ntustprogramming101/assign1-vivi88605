@@ -1,7 +1,7 @@
 PImage bg, groundhog, soil, life, soldier, robot;
 
 //laser
-float laserX, laserY;
+float laserX, laserY, laserLength;
 
 //soldier
 float soldierX;
@@ -28,11 +28,11 @@ void setup() {
   rect(0,145,640,160);
 
   //input groundhog
-  groundhog = loadImage("groundhog.png");
+  groundhog = loadImage("img/groundhog.png");
   image(groundhog,280,80);
   
   //draw soil
-  soil = loadImage("soil.png");
+  soil = loadImage("img/soil.png");
 
   
   //input life
@@ -54,8 +54,8 @@ void setup() {
     soldierFloor = a*80+160;
     
   //input robot
-  robot = loadImage("robot.png");
-    robotX= int(random(25,640));
+  robot = loadImage("img/robot.png");
+    robotX= int(random(25,480));
     b = int(random(0,4));
     robotFloor = b*80+160;
     
@@ -71,25 +71,27 @@ void draw() {
     image(soil,0,160);
   
   //let soldier walk
-  soldierX +=5;
-  soldierX%=640;
-  image(soldier,soldierX,soldierFloor);
+  soldierX +=3;
+  soldierX%=720;
+  image(soldier,soldierX-80,soldierFloor);
   
   //draw laser
-  noStroke();
-  fill(255,0,0);
-  ellipse(laserX+25,laserY+37,10,10);
-  rectMode(CORNERS);
-  rect(laserX-5,laserY+32,laserX+25,laserY+42);
-  ellipse(laserX-5,laserY+37,10,10);
+  stroke(255, 0, 0);
+  strokeWeight(10);
+  image(robot, robotX, robotFloor);
+  line(laserX, laserY+37, laserX+laserLength, laserY+37);
   
   //shoot laser
-  laserX-=2;
-  if(laserX+40<0){
-    laserX=robotX;
+  if(laserX >= robotX-160){
+    laserX -= 2;
+    laserLength += 2;
+    if(laserLength >= 40){
+      laserLength = 40;
+    }
   }
-  
-  //place the robot
-  image(robot,robotX,robotFloor);
+  else{
+    laserX = robotX+25;
+    laserLength = 0;
+  }
   
 }
